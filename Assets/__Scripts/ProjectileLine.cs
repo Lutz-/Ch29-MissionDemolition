@@ -55,7 +55,33 @@ public class ProjectileLine : MonoBehaviour {
     //TODO: Implement the AddPoint function
     public void AddPoint()
     {
-        // *** Implement this code ***
+        Vector3 pt = _poi.transform.position;
+        if (points.Count > 0 && (pt - lastPoint).magnitude < minDist)
+            return;
+
+        // This bit of code added a line that looked like a bug with the projectile line when I was playing
+        // I realize that it isn't a bug, but I have commented it out because in my opinion it ruins the aesthetic of the game.
+        // To utilize the feature, uncomment this section :)
+        //
+        //if(points.Count == 0)
+        //{
+        //    Vector3 launchPosDiff = pt - Slingshot.LAUNCH_POS;
+        //
+        //    points.Add(pt + launchPosDiff);
+        //    points.Add(pt);
+        //    line.positionCount = 2;
+        //    line.SetPosition(0, points[0]);
+        //    line.SetPosition(0, points[1]);
+        //    line.enabled = true;
+        // }
+
+        else
+        {
+            points.Add(pt);
+            line.positionCount = points.Count;
+            line.SetPosition(points.Count - 1, lastPoint);
+            line.enabled = true;
+        }
 
 
 
